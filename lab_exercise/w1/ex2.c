@@ -7,11 +7,13 @@ int main(void)
 	void task2(void);
 	void task3(void);
 	void task4(void);
+	void task5(void);
 
 	task1();
 	task2();
 	task3();
 	task4();
+	task5();
 
 	return EXIT_SUCCESS;
 }
@@ -140,3 +142,37 @@ void task4(void)
 		}
 	}
 }
+
+void task5(void)
+{
+	int a=11;
+
+	printf("\nTask 5\n");	
+
+	for(int i=1; i<=11; i++)
+	{
+		if(a==11)
+		{
+			for(int j=1; j<=a; j++)
+			{
+				printf("*");
+				printf(" ");
+			}
+			
+			a--;
+		}
+		else
+		{
+			for(int j=1; j<=a; j++)
+			{
+				printf(" ");
+				printf("*");
+			}
+			
+			a++;
+		}
+		printf("\n");
+	}
+}
+
+
