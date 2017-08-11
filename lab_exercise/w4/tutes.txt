@@ -1,0 +1,72 @@
+QUESTION 2).
+
+a).
+	int i, j;
+	int *pi = &i, *pj = &j;
+
+b).
+	float *pf = NULL;
+	double *pd = NULL;
+
+c).
+	Long *func(int i, int j);
+
+d).
+	long func(int *i, int *j);
+
+e).
+	Float *array[10];
+
+f).
+	char *array[3] = {"red", "green", "blue"};
+
+QUESTION 3).
+
+a). 
+- The name of an array of integers with 8 elements.
+- The address of the first element in the array.
+- It is a constant pointer  
+
+b).
+- The address of the third element - address of where 30 is stored.
+
+c).
+- Dereferencing the address of the first element --> 10.
+
+d).
+- (10 + 2).
+
+e).
+- 30.
+
+
+QUESTION 4).
+
+a).
+
+
+
+
+
+QUESTION 5).
+- Out of bounds number entered by the user
+- Non numerical input
+
+
+QUESTION 6).
+- User puts in too many characters
+	- This is buffer overflow
+- If the user enter a fullname then the lastname will be interpreted as the color.
+
+
+QUESTION 7).
+- valgrind ./reversi.exec
+- using a symbol debugger such as gdb
+- 
+
+
+
+
+
+
+		

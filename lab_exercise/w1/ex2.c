@@ -80,10 +80,6 @@ void task3(void)
 			printf("*");
 		}
 		
-		for(int j=1; j<=b; j++)
-		{
-			printf(" ");
-		}
 
 		a+=2;
 		b--;
@@ -112,10 +108,6 @@ void task4(void)
 				printf("*");
 			}
 			
-			for(int j=1; j<=b; j++)
-			{
-				printf(" ");
-			}
 			
 			a+=2;
 			b--;
@@ -130,10 +122,6 @@ void task4(void)
 			for(int j=1; j<=a-4; j++)
 			{
 				printf("*");
-			}
-			for(int j=-1; j<=b; j++)
-			{
-				printf(" ");
 			}
 			
 			a-=2;
