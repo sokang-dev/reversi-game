@@ -26,4 +26,7 @@ typedef struct player
 void initFirstPlayer(Player * player);
 void initSecondPlayer(Player * player, Cell token);
 
+
+
+
 #endif

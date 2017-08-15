@@ -62,7 +62,7 @@ QUESTION 6).
 QUESTION 7).
 - valgrind ./reversi.exec
 - using a symbol debugger such as gdb
-- 
+
 
 
 

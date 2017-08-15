@@ -24,6 +24,20 @@
  **/
 Player * playGame(Player * first, Player * second)
 {
+	initFirstPlayer(first);
+	initSecondPlayer(second, first->token);
+	initBoard(board);
+	
+	do
+	{
+		playerDetails(first, second);
+		displayBoard(board, first, second);
+		makeMove(first, board);
+		swapPlayers(&first, &second);
+	} while(finished);
+	
+	
+	
     return NULL;
 }
 
@@ -40,7 +54,28 @@ Player * playGame(Player * first, Player * second)
  **/
 Boolean makeMove(Player * player, Cell board[BOARD_HEIGHT][BOARD_WIDTH])
 {
-    return FALSE;
+    if(player1.token == RED)
+		*player = player1;
+	else
+		*player = player2;
+	
+	printf("It is %s's turn.\n", player->name);
+	printf("Please enter x and y coordinates separated by a comma: ");
+	fgets(coordinate, sizeof(coordinate), stdin);
+	
+	if(coordinate[0] == '\n')
+	{
+		finished = FALSE;
+		return FALSE;
+	}
+	else
+	{	
+		sscanf(coordinate, "%u,%u", &y, &x);
+		applyMove(board, x, y, player->token);
+		finished = TRUE;
+		return TRUE;
+	}
+	
 }
 
 /**
@@ -56,6 +91,11 @@ Boolean makeMove(Player * player, Cell board[BOARD_HEIGHT][BOARD_WIDTH])
  **/
 Boolean applyMove(Cell board[BOARD_HEIGHT][BOARD_WIDTH], int y, int x, Cell token)
 {
+	if(token == RED)		
+		board[y-1][x-1] = RED;
+	else
+		board[y-1][x-1] = CYAN;
+	
     return FALSE;
 }
 
@@ -71,4 +111,55 @@ unsigned gameScore(Cell board[BOARD_HEIGHT][BOARD_WIDTH], Cell token)
  * Swaps the two player pointers so that first points to second and vice versa.
  **/
 void swapPlayers(Player ** first, Player ** second)
-{ }
+{
+	*first = *second;
+	*second = *first;
+}
+
+
+
+
+void playerDetails(Player * first, Player * second)
+{
+	printf("\n");
+	UNDERLINE2;
+	printf("Player One's Details\n");
+	printf("--------------------\n");
+	printf("Name: %-25s", first->name);
+	printf("%s%d", "Score: ", first->score);
+	printf("%20s", "Token: ");
+	if(player1.token == RED)
+		printf("%s%s%s\n", COLOR_RED, "O", COLOR_RESET);
+	else
+		printf("%s%s%s\n", COLOR_CYAN, "O", COLOR_RESET);
+	UNDERLINE1;
+	
+	printf("Player Two's Details\n");
+	printf("--------------------\n");
+	printf("Name: %-25s", second->name);
+	printf("%s%d", "Score: ", second->score);
+	printf("%20s", "Token: ");
+	if(player1.token == CYAN)
+		printf("%s%s%s\n", COLOR_RED, "O", COLOR_RESET);
+	else
+		printf("%s%s%s\n", COLOR_CYAN, "O", COLOR_RESET);
+	UNDERLINE2;
+	printf("\n");
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
