@@ -121,6 +121,28 @@ void swapPlayers(Player ** first, Player ** second)
 
 void playerDetails(Player * first, Player * second)
 {
+    printf("\n");
+    BORDER_WIDTH;
+    printf("%-4s%s%5s", "*", "Player One's Details", "*\n");
+    BORDER_WIDTH;
+    //printf("*-------------------------*\n");
+    printf("*Name:  %-19s*\n", first->name);
+    printf("*%s%-19d*\n", "Score: ", first->score);
+    printf("*%s", "Token: ");
+    if(player1.token == RED)
+		printf("%s%s%-22s*\n", COLOR_RED, "O", COLOR_RESET);
+	else
+		printf("%s%s%-22s*\n", COLOR_CYAN, "O", COLOR_RESET);
+    BORDER_WIDTH;
+
+    
+    
+    
+    
+    
+    
+    
+    /*
 	printf("\n");
 	UNDERLINE2;
 	printf("Player One's Details\n");
@@ -145,6 +167,7 @@ void playerDetails(Player * first, Player * second)
 		printf("%s%s%s\n", COLOR_CYAN, "O", COLOR_RESET);
 	UNDERLINE2;
 	printf("\n");
+    */
 }
 	
 	
