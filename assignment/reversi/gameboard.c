@@ -34,12 +34,13 @@ void displayBoard(
 {
 	char row[8] = {1, 2, 3, 4, 5, 6, 7, 8};
 
-	printf("%6s%4s%4s%4s%4s%4s%4s%5s", "1", "2", "3", "4", "5", "6", "7", "8\n");
-	BOARD_BORDER2;
+	printf("%17s%4s%4s%4s%4s%4s%4s%5s", "1", "2", "3", "4", "5", "6", "7", "8\n");
+	SPACE;
+    BOARD_BORDER2;
 	
 	for(int i=0; i<8; i++)
 	{
-		printf("%2d%2s", row[i], "|");
+		printf("%13d%2s", row[i], "|");
 		
 		for(int j=0; j<8; j++)
 		{			
@@ -61,11 +62,13 @@ void displayBoard(
 		
 		if(i==7)
 		{
+            SPACE;
 			BOARD_BORDER2;
 			break;
 		}
 		
-		BOARD_BORDER1;
+		SPACE;
+        BOARD_BORDER1;
 	}
 
 }

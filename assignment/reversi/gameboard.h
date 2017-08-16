@@ -7,6 +7,7 @@
 #define BOARD_WIDTH BOARD_HEIGHT
 #define BOARD_BORDER1 for(int i=0; i<6; i++) printf("------"); printf("\n");
 #define BOARD_BORDER2 for(int i=0; i<6; i++) printf("======"); printf("\n");
+#define SPACE for(int i=0; i<11; i++) printf(" ");
 
 void initBoard(Cell board[BOARD_HEIGHT][BOARD_WIDTH]);
 void displayBoard(

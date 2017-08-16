@@ -123,19 +123,42 @@ void playerDetails(Player * first, Player * second)
 {
     printf("\n");
     BORDER_WIDTH;
-    printf("%-4s%s%5s", "*", "Player One's Details", "*\n");
+    printf("  ");
     BORDER_WIDTH;
+    printf("\n");
+    printf("%-4s%s%4s", "*", "Player One's Details", "*");
+    printf("  %-4s%s%5s", "*", "Player Two's Details", "*\n");
+    BORDER_WIDTH;
+    printf("  ");
+    BORDER_WIDTH;
+    printf("\n");
+    
+    
     //printf("*-------------------------*\n");
-    printf("*Name:  %-19s*\n", first->name);
-    printf("*%s%-19d*\n", "Score: ", first->score);
+    
+    
+    
+    printf("*Name:  %-19s*", first->name);
+    printf("  *Name:  %-19s*\n", second->name);
+    
+    printf("*%s%-19d*", "Score: ", first->score);
+    printf("  *%s%-19d*\n", "Score: ", second->score);
+    
     printf("*%s", "Token: ");
     if(player1.token == RED)
+		printf("%s%s%-22s*", COLOR_RED, "O", COLOR_RESET);
+	else
+		printf("%s%s%-22s*", COLOR_CYAN, "O", COLOR_RESET);
+    
+    printf("  *%s", "Token: ");
+    if(player1.token == CYAN)
 		printf("%s%s%-22s*\n", COLOR_RED, "O", COLOR_RESET);
 	else
 		printf("%s%s%-22s*\n", COLOR_CYAN, "O", COLOR_RESET);
     BORDER_WIDTH;
-
-    
+    printf("  ");
+    BORDER_WIDTH;
+    printf("\n\n");
     
     
     
