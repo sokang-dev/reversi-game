@@ -16,15 +16,18 @@
  */
 typedef enum direction
 {
-    NORTH, SOUTH, EAST, WEST, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST
+    NORTH_WEST, NORTH, NORTH_EAST, WEST, CENTRE, EAST, SOUTH_WEST, SOUTH, SOUTH_EAST
 } Direction;
 
 Player player1, player2;
-
+Player *temp;
 Cell board[BOARD_HEIGHT][BOARD_WIDTH];
-Boolean finished;
+unsigned redCounter, cyanCounter;
+Boolean finished, valid;
 char coordinate[10];
-unsigned x, y;
+unsigned x, y, k, l;
+Direction direction;
+
 
 Player * playGame(Player * first, Player * second);
 Boolean makeMove(Player * player, Cell board[BOARD_HEIGHT][BOARD_WIDTH]);
@@ -32,5 +35,6 @@ Boolean applyMove(Cell board[BOARD_HEIGHT][BOARD_WIDTH], int y, int x, Cell toke
 unsigned gameScore(Cell board[BOARD_HEIGHT][BOARD_WIDTH], Cell token);
 void swapPlayers(Player ** first, Player ** second);
 void playerDetails(Player *first, Player *second);
+void moveValidation(Cell board[BOARD_HEIGHT][BOARD_WIDTH], int y, int x, Cell token);
 
 #endif

@@ -24,21 +24,34 @@
  **/
 Player * playGame(Player * first, Player * second)
 {
-	initFirstPlayer(first);
-	initSecondPlayer(second, first->token);
+	initFirstPlayer(&player1);
+	initSecondPlayer(&player2, player1.token);
 	initBoard(board);
 	
 	do
 	{
-		playerDetails(first, second);
-		displayBoard(board, first, second);
+        gameScore(board, player1.token);
+		playerDetails(&player1, &player2);
+		displayBoard(board, &player1, &player2);
 		makeMove(first, board);
 		swapPlayers(&first, &second);
 	} while(finished);
 	
-	
-	
-    return NULL;
+	if(player1.score > player2.score)
+    {
+        printf("\n%s wins!\n", player1.name);
+        return 0;
+    }
+    else if(player2.score > player1.score)
+    {
+        printf("\n%s wins!\n", player2.name);
+        return 0;
+    }
+	else
+    {
+        printf("\nThis game ends with a draw!\n");
+        return NULL;
+    }   
 }
 
 /**
@@ -54,24 +67,24 @@ Player * playGame(Player * first, Player * second)
  **/
 Boolean makeMove(Player * player, Cell board[BOARD_HEIGHT][BOARD_WIDTH])
 {
-    if(player1.token == RED)
-		*player = player1;
+    if(player->token == RED)
+		player = &player1;
 	else
-		*player = player2;
+		player = &player2;
 	
-	printf("It is %s's turn.\n", player->name);
+	printf("\nIt is %s's turn.\n", player->name);
 	printf("Please enter x and y coordinates separated by a comma: ");
 	fgets(coordinate, sizeof(coordinate), stdin);
 	
 	if(coordinate[0] == '\n')
 	{
-		finished = FALSE;
+		finished = FALSE;          
 		return FALSE;
 	}
 	else
 	{	
 		sscanf(coordinate, "%u,%u", &y, &x);
-		applyMove(board, x, y, player->token);
+		applyMove(board, y, x, player->token);
 		finished = TRUE;
 		return TRUE;
 	}
@@ -91,29 +104,276 @@ Boolean makeMove(Player * player, Cell board[BOARD_HEIGHT][BOARD_WIDTH])
  **/
 Boolean applyMove(Cell board[BOARD_HEIGHT][BOARD_WIDTH], int y, int x, Cell token)
 {
-	if(token == RED)		
-		board[y-1][x-1] = RED;
-	else
-		board[y-1][x-1] = CYAN;
+	direction = 0;
 	
-    return FALSE;
+	for(int i=2; i>=0; i--)
+	{
+		
+		for(int j=2; j>=0; j--)
+		{
+			
+			if(board[x-1][y-1] == BLANK)
+			{
+				
+				if(token == RED && (x-i) >=0 && (y-j) >= 0)
+				{	
+				
+					
+					if(board[x-i][y-j] != CYAN)
+					{
+						direction++;
+						printf("\n6");
+						continue;
+					}
+					
+					else
+					{
+						switch(direction)
+						{
+							case 0:
+								k = -1;
+								l = -1;
+								break;
+							case 1:
+								k = -1;
+								l = 0;
+								break;
+							case 2:
+								k = -1;
+								l = 1;
+								break;
+							case 3:
+								k = 0;
+								l = -1;
+								break;
+							case 4:
+								k = 0;
+								l = 0;
+								break;
+							case 5:
+								k = 0;
+								l = 1;
+								break;
+							case 6:
+								k = 1;
+								l = -1;
+								break;
+							case 7:
+								k = 1;
+								l = 0;
+								break;
+							case 8:
+								k = 1;
+								l = 1;
+								break;
+						}
+						
+						while((x-i+k) >= 0 && (x-i+k) < 8 && (y-j+l) >=0 && (y-j+l) < 8)
+						{
+							if(board[x-i+k][y-j+l] == CYAN)
+							{
+								
+								switch(k)
+								{
+									case -1:
+										k--;
+										break;
+									case 0:
+										break;
+									case 1:
+										k++;
+										break;
+								}
+								
+								switch(l)
+								{
+									case -1:
+										l--;
+										break;
+									case 0:
+										break;
+									case 1:
+										l++;
+										break;
+								}
+							}
+							else if(board[x-i+k][y-j+l] == RED)
+							{
+							
+								board[x-1][y-1] = RED;
+								board[x-i][y-j] = RED;
+								break;
+							}
+							else
+							{
+								direction++;
+								printf("\nInvalid Move ");
+								break;
+							}
+						}
+					}
+				}
+				
+				else if(token == CYAN && (x-i) >=0 && (y-j) >= 0)
+				{
+				
+				
+					
+					
+					if(board[x-i][y-j] != RED)
+					{
+						direction++;
+					
+						continue;
+					}
+					
+					else
+					{
+						switch(direction)
+						{
+							case 0:
+								k = -1;
+								l = -1;
+								break;
+							case 1:
+								k = -1;
+								l = 0;
+								break;
+							case 2:
+								k = -1;
+								l = 1;
+								break;
+							case 3:
+								k = 0;
+								l = -1;
+								break;
+							case 4:
+								k = 0;
+								l = 0;
+								break;
+							case 5:
+								k = 0;
+								l = 1;
+								break;
+							case 6:
+								k = 1;
+								l = -1;
+								break;
+							case 7:
+								k = 1;
+								l = 0;
+								break;
+							case 8:
+								k = 1;
+								l = 1;
+								break;
+						}
+						
+						while((x-i+k) >= 0 && (x-i+k) < 8 && (y-j+l) >=0 && (y-j+l) < 8)
+						{
+							if(board[x-i+k][y-j+l] == RED)
+							{			
+								switch(k)
+								{
+									case -1:
+										k--;
+										break;
+									case 0:
+										break;
+									case 1:
+										k++;
+										break;
+								}
+								
+								switch(l)
+								{
+									case -1:
+										l--;
+										break;
+									case 0:
+										break;
+									case 1:
+										l++;
+										break;
+								}
+							}
+							else if(board[x-i+k][y-j+l] == CYAN)
+							{
+							
+								board[x-1][y-1] = CYAN;
+								board[x-i][y-j] = CYAN;
+								break;
+							}
+							else
+							{
+								direction++;
+								printf("\nInvalid Move");
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	//board[x-1][y-1] = RED;
+	
+	return FALSE;
 }
+
+void moveValidation(Cell board[BOARD_HEIGHT][BOARD_WIDTH], int y, int x, Cell token)
+{
+	
+}				
+
+
+
+
 
 /**
  * Simply counts how many locations contain the token specified on board.
  **/
 unsigned gameScore(Cell board[BOARD_HEIGHT][BOARD_WIDTH], Cell token)
 {
+    redCounter = 0;
+    cyanCounter = 0;
+    
+    for(int i=0; i<8; i++)
+    {
+        for(int j=0; j<8; j++)
+        {
+            switch(board[i][j])
+            {
+                case RED:
+                    redCounter++;                    
+                    if(token == RED)
+                        player1.score = redCounter;
+                    else player2.score = redCounter;
+                    break;
+                case CYAN:
+                    cyanCounter++;
+                    if(token == CYAN)
+                        player1.score = cyanCounter;
+                    else player2.score = cyanCounter;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+      
     return 0;
 }
+
 
 /**
  * Swaps the two player pointers so that first points to second and vice versa.
  **/
 void swapPlayers(Player ** first, Player ** second)
 {
-	*first = *second;
-	*second = *first;
+	temp = *first;
+    *first = *second;
+	*second = temp;
 }
 
 
@@ -132,17 +392,46 @@ void playerDetails(Player * first, Player * second)
     printf("  ");
     BORDER_WIDTH;
     printf("\n");
+        
+    if(player1.token == RED)
+    {
+        printf("*Name:  %s%-19s%s*", COLOR_RED, first->name, COLOR_RESET);
+        printf("  *Name:  %s%-19s%s*\n", COLOR_CYAN, second->name, COLOR_RESET);
+        
+        printf("*%s%s%-19d%s*", "Score: ", COLOR_RED, first->score, COLOR_RESET);
+        printf("  *%s%s%-19d%s*\n", "Score: ", COLOR_CYAN, second->score, COLOR_RESET);
+        
+        printf("*%s", "Token: ");
+        printf("%s%s%-22s*", COLOR_RED, "O", COLOR_RESET);
+        
+        printf("  *%s", "Token: ");
+        printf("%s%s%-22s*\n", COLOR_CYAN, "O", COLOR_RESET);       
+    }
+    else
+    {
+        printf("*Name:  %s%-19s%s*", COLOR_CYAN, first->name, COLOR_RESET);
+        printf("  *Name:  %s%-19s%s*\n", COLOR_RED, second->name, COLOR_RESET);
+        
+        printf("*%s%s%-19d%s*", "Score: ", COLOR_CYAN, first->score, COLOR_RESET);
+        printf("  *%s%s%-19d%s*\n", "Score: ", COLOR_RED, second->score, COLOR_RESET);
+        
+        printf("*%s", "Token: ");
+        printf("%s%s%-22s*", COLOR_CYAN, "O", COLOR_RESET);
+        
+        printf("  *%s", "Token: ");
+        printf("%s%s%-22s*\n", COLOR_RED, "O", COLOR_RESET); 
+    }
     
+    BORDER_WIDTH;
+    printf("  ");
+    BORDER_WIDTH;
+    printf("\n\n");
     
-    //printf("*-------------------------*\n");
-    
-    
-    
-    printf("*Name:  %-19s*", first->name);
+    /*printf("*Name:  %-19s*", first->name);
     printf("  *Name:  %-19s*\n", second->name);
     
     printf("*%s%-19d*", "Score: ", first->score);
-    printf("  *%s%-19d*\n", "Score: ", second->score);
+   
     
     printf("*%s", "Token: ");
     if(player1.token == RED)
@@ -155,44 +444,10 @@ void playerDetails(Player * first, Player * second)
 		printf("%s%s%-22s*\n", COLOR_RED, "O", COLOR_RESET);
 	else
 		printf("%s%s%-22s*\n", COLOR_CYAN, "O", COLOR_RESET);
-    BORDER_WIDTH;
-    printf("  ");
-    BORDER_WIDTH;
-    printf("\n\n");
-    
-    
-    
-    
-    
-    
-    /*
-	printf("\n");
-	UNDERLINE2;
-	printf("Player One's Details\n");
-	printf("--------------------\n");
-	printf("Name: %-25s", first->name);
-	printf("%s%d", "Score: ", first->score);
-	printf("%20s", "Token: ");
-	if(player1.token == RED)
-		printf("%s%s%s\n", COLOR_RED, "O", COLOR_RESET);
-	else
-		printf("%s%s%s\n", COLOR_CYAN, "O", COLOR_RESET);
-	UNDERLINE1;
-	
-	printf("Player Two's Details\n");
-	printf("--------------------\n");
-	printf("Name: %-25s", second->name);
-	printf("%s%d", "Score: ", second->score);
-	printf("%20s", "Token: ");
-	if(player1.token == CYAN)
-		printf("%s%s%s\n", COLOR_RED, "O", COLOR_RESET);
-	else
-		printf("%s%s%s\n", COLOR_CYAN, "O", COLOR_RESET);
-	UNDERLINE2;
-	printf("\n");
     */
 }
 	
+
 	
 	
 	

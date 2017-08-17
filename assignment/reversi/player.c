@@ -12,18 +12,19 @@
  * Note that an empty name is not valid and the user should be re-prompted.
  **/
 void initFirstPlayer(Player * player)
-{
-	player->score = 2;
-	
+{	
 	/* source code taken and modified from kjfletch from
 	 * kjfletch on stackoverflow website
 	 * https://stackoverflow.com/questions/1108780/why-do-i-always-get-the-same-sequence-of-random-numbers-with-rand
 	 */
 	srand(time(NULL));
 	if(rand() % 2 + 1 == 1)
-		player->token = RED;
+        player->token = RED;		
 	else
 		player->token = CYAN;
+    
+    player->score = 0;
+    
 	
 	while(TRUE)
 	{
@@ -48,7 +49,6 @@ void initFirstPlayer(Player * player)
 
 void initSecondPlayer(Player * player, Cell token)
 {
-	player->score = 2;
 	if(token == RED)
 		player->token = CYAN;
 	else
@@ -73,6 +73,8 @@ void initSecondPlayer(Player * player, Cell token)
 			break;
 		}
 	}
+    
+    player->score = 0;
 }
 
 	
