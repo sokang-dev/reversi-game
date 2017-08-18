@@ -10,11 +10,11 @@
  **/
 void initBoard(Cell board[BOARD_HEIGHT][BOARD_WIDTH])
 {
-	for(int i=0; i<8; i++)
+	for(d=0; d<8; d++)
 	{
-		for(int j=0; j<8; j++)
+		for(e=0; e<8; e++)
 		{
-			board[i][j] = BLANK;
+			board[d][e] = BLANK;
 		}
 	}
 	
@@ -22,7 +22,6 @@ void initBoard(Cell board[BOARD_HEIGHT][BOARD_WIDTH])
 	board[4][4] = RED;
 	board[3][4] = CYAN;
 	board[4][3] = CYAN;
-	//board[0][4] = RED;
 }
 
 /**
@@ -32,18 +31,21 @@ void initBoard(Cell board[BOARD_HEIGHT][BOARD_WIDTH])
  **/
 void displayBoard(
     Cell board[BOARD_HEIGHT][BOARD_WIDTH], Player * first, Player * second)
-{
-	char row[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+{   
+    char row[8] = {1, 2, 3, 4, 5, 6, 7, 8};
 
 	printf("%17s%4s%4s%4s%4s%4s%4s%5s", "1", "2", "3", "4", "5", "6", "7", "8\n");
-	SPACE;
-    BOARD_BORDER2;
+	space();
+    border2();
+    
+    /*SPACE;
+    BOARD_BORDER2;*/
 	
-	for(int i=0; i<8; i++)
+	for(i=0; i<8; i++)
 	{
 		printf("%13d%2s", row[i], "|");
 		
-		for(int j=0; j<8; j++)
+		for(j=0; j<8; j++)
 		{			
 			switch(board[i][j])
 			{
@@ -63,13 +65,38 @@ void displayBoard(
 		
 		if(i==7)
 		{
-            SPACE;
-			BOARD_BORDER2;
+            space();
+            border2();
+            
+            /*SPACE;
+			BOARD_BORDER2;*/
 			break;
 		}
 		
-		SPACE;
-        BOARD_BORDER1;
+		space();
+        border1();
+        
+        /*SPACE;
+        BOARD_BORDER1;*/
 	}
+}
 
+void border1()
+{
+    for(a=0; a<6; a++) 
+        printf("------"); 
+    printf("\n");
+}
+
+void border2()
+{
+    for(b=0; b<6; b++) 
+        printf("======"); 
+    printf("\n");
+}
+
+void space()
+{
+    for(c=0; c<11; c++) 
+        printf(" ");
 }

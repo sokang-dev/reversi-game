@@ -1,8 +1,6 @@
-//Testing
-
 #include "reversi.h"
 
-
+/* fuck yes */
 int main()
 {	
 	do

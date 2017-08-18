@@ -106,10 +106,10 @@ Boolean applyMove(Cell board[BOARD_HEIGHT][BOARD_WIDTH], int y, int x, Cell toke
 {
 	direction = 0;
 	
-	for(int i=2; i>=0; i--)
+	for(i=2; i>=0; i--)
 	{
 		
-		for(int j=2; j>=0; j--)
+		for(j=2; j>=0; j--)
 		{
 			
 			if(board[x-1][y-1] == BLANK)
@@ -316,7 +316,6 @@ Boolean applyMove(Cell board[BOARD_HEIGHT][BOARD_WIDTH], int y, int x, Cell toke
 			}
 		}
 	}
-	//board[x-1][y-1] = RED;
 	
 	return FALSE;
 }
@@ -338,9 +337,9 @@ unsigned gameScore(Cell board[BOARD_HEIGHT][BOARD_WIDTH], Cell token)
     redCounter = 0;
     cyanCounter = 0;
     
-    for(int i=0; i<8; i++)
+    for(i=0; i<8; i++)
     {
-        for(int j=0; j<8; j++)
+        for(j=0; j<8; j++)
         {
             switch(board[i][j])
             {

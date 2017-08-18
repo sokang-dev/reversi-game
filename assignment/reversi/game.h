@@ -3,11 +3,11 @@
 
 #include "gameboard.h"
 
-#define UNDERLINE1 for(int i=0; i<10; i++) printf("--------"); printf("\n");
-#define UNDERLINE2 for(int i=0; i<10; i++) printf("========"); printf("\n");
+#define UNDERLINE1 for(i=0; i<10; i++) printf("--------"); printf("\n");
+#define UNDERLINE2 for(i=0; i<10; i++) printf("========"); printf("\n");
 
-#define BORDER_WIDTH for(int i=0; i<28; i++) printf("*");
-#define BORDER_HEIGHT for(int i=0; i<15; i++) printf("*"); printf("\n");
+#define BORDER_WIDTH for(i=0; i<28; i++) printf("*");
+#define BORDER_HEIGHT for(i=0; i<15; i++) printf("*"); printf("\n");
 
 /**
  * All directions pieces can be captured in.
@@ -27,6 +27,7 @@ Boolean finished, valid;
 char coordinate[10];
 unsigned x, y, k, l;
 Direction direction;
+int i, j;
 
 
 Player * playGame(Player * first, Player * second);

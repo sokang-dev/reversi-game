@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -I -ansi -Wall -pedantic -std=c99
+CFLAGS =  -ansi -Wall -pedantic
 DEPS = game.h player.h gameboard.h reversi.h utility.h
 OBJ = game.o player.o gameboard.o reversi.o utility.o
 
@@ -9,5 +9,6 @@ OBJ = game.o player.o gameboard.o reversi.o utility.o
 reversi: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 	
-
+clean:
+	rm -f $(OBJ) *~ core 
 
