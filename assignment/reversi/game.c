@@ -39,12 +39,12 @@ Player * playGame(Player * first, Player * second)
 	
 	if(player1.score > player2.score)
     {
-        printf("\n%s wins!\n", player1.name);
+        printf("\n%s WINS!!!\n", player1.name);
         return 0;
     }
     else if(player2.score > player1.score)
     {
-        printf("\n%s wins!\n", player2.name);
+        printf("\n%s WINS!!!\n", player2.name);
         return 0;
     }
 	else
@@ -83,8 +83,17 @@ Boolean makeMove(Player * player, Cell board[BOARD_HEIGHT][BOARD_WIDTH])
 	}
 	else
 	{	
-		sscanf(coordinate, "%u,%u", &y, &x);
-		applyMove(board, y, x, player->token);
+		sscanf(coordinate, "%d,%d", &y, &x);
+        applyMove(board, y, x, player->token);
+        
+        /*while(valid == FALSE)
+        {
+            printf("\nInvalid Move!!!");
+            printf("\nPlease enter x and y coordinates separated by a comma: ");
+            sscanf(coordinate, "%d,%d", &y, &x);
+            applyMove(board, y, x, player->token);
+        }*/
+		
 		finished = TRUE;
 		return TRUE;
 	}
@@ -104,6 +113,7 @@ Boolean makeMove(Player * player, Cell board[BOARD_HEIGHT][BOARD_WIDTH])
  **/
 Boolean applyMove(Cell board[BOARD_HEIGHT][BOARD_WIDTH], int y, int x, Cell token)
 {
+    valid = FALSE;
 	direction = 0;
 	if(token == RED)
 	{					
@@ -116,255 +126,166 @@ Boolean applyMove(Cell board[BOARD_HEIGHT][BOARD_WIDTH], int y, int x, Cell toke
 		opposite = RED;
 	}
 	
-	for(i=2; i>=0; i--)
-	{
-		for(j=2; j>=0; j--)
-		{
-            if((x-i) >=0 && (y-j) >= 0)
+    if(board[x-1][y-1] != BLANK)
+    {
+        valid = FALSE;
+    }
+    else
+    {
+        for(i=2; i>=0; i--)
+        {
+            for(j=2; j>=0; j--)
             {
-				
                 /*printf("\nx-i: %d y-j: %d", x-i, y-j);*/
-                if(board[x-i][y-j] != CYAN)
+                if((x-i) >=0 && (y-j) >= 0)
                 {
-                    direction++;
-                    continue;
-                }
-
-                else
-                {
-                    switch(direction)
+                    /*printf("\nx-i: %d y-j: %d", x-i, y-j);*/
+                    if(board[x-i][y-j] != opposite)
                     {
-                        case 0:
-                            k = -1;
-                            l = -1;
-                            break;
-                        case 1:
-                            k = -1;
-                            l = 0;
-                            break;
-                        case 2:
-                            k = -1;
-                            l = 1;
-                            break;
-                        case 3:
-                            k = 0;
-                            l = -1;
-                            break;
-                        case 4:
-                            k = 0;
-                            l = 0;
-                            break;
-                        case 5:
-                            k = 0;
-                            l = 1;
-                            break;
-                        case 6:
-                            k = 1;
-                            l = -1;
-                            break;
-                        case 7:
-                            k = 1;
-                            l = 0;
-                            break;
-                        case 8:
-                            k = 1;
-                            l = 1;
-                            break;
+                        direction++;
+                        continue;
                     }
-                    
-                    printf("\nd: %u", direction);
-                    printf("\nk: %d l: %d", k, l);
-                    m = k, n = l;
 
-                    /*if((x-i+m) >= 0 && (x-i+m) < 8 && (y-j+n) >=0 && (y-j+n) < 8)*/
-                    while((x-i+m) >= 0 && (x-i+m) < 8 && (y-j+n) >=0 && (y-j+n) < 8)
-                    /*while(o < 3)*/
+                    else
                     {
-                        /*printf("\nloop");*/
-                        if(board[x-i+m][y-j+n] == CYAN)
+                        switch(direction)
                         {
-                            /*printf("\nCYAN");
-                            printf("\nx-i+m: %d y-j+n: %d", x-i+m, y-j+n);*/
-                            switch(k)
-                            {
-                                case -1:
-                                    m--;
-                                    break;
-                                case 0:
-                                    break;
-                                case 1:
-                                    m++;
-                                    break;
-                            }
-
-                            switch(l)
-                            {
-                                case -1:
-                                    n--;
-                                    break;
-                                case 0:
-                                    break;
-                                case 1:
-                                    n++;
-                                    break;
-                            }
-                            printf("\nk: %d l: %d", k, l);
-                            /*printf("\nx-i+m: %d y-j+n: %d", x-i+m, y-j+n);*/
+                            case 0:
+                                k = -1;
+                                l = -1;
+                                break;
+                            case 1:
+                                k = -1;
+                                l = 0;
+                                break;
+                            case 2:
+                                k = -1;
+                                l = 1;
+                                break;
+                            case 3:
+                                k = 0;
+                                l = -1;
+                                break;
+                            case 4:
+                                k = 0;
+                                l = 0;
+                                break;
+                            case 5:
+                                k = 0;
+                                l = 1;
+                                break;
+                            case 6:
+                                k = 1;
+                                l = -1;
+                                break;
+                            case 7:
+                                k = 1;
+                                l = 0;
+                                break;
+                            case 8:
+                                k = 1;
+                                l = 1;
+                                break;
                         }
-                        else if(board[x-i+m][y-j+n] == RED)
+
+                        /*printf("\nd: %u", direction);
+                        printf("\nk: %d l: %d", k, l);*/
+                        m = k, n = l;
+
+                        direction++;
+
+                        while((x-i+m) >= 0 && (x-i+m) < 8 && (y-j+n) >=0 && (y-j+n) < 8)
                         {
-                            printf("\n1x-i+m: %d y-j+n: %d", x-i+m, y-j+n);
-                            printf("\nx-1: %d y-1: %d", x-1, y-1);
-                            printf("\nk: %d l: %d", k, l);
-                            
-                            while((x-i+m) != (x-1) || (y-j+n) != (y-1))
+                            /*printf("\nloop");*/
+                            if(board[x-i+m][y-j+n] == opposite)
                             {
-                                printf("\nIn loop");
+                                /*printf("\nCYAN");
+                                printf("\nx-i+m: %d y-j+n: %d", x-i+m, y-j+n);*/
                                 switch(k)
                                 {
                                     case -1:
-                                        m++;
+                                        m--;
                                         break;
                                     case 0:
                                         break;
                                     case 1:
-                                        m--;
+                                        m++;
                                         break;
                                 }
 
                                 switch(l)
                                 {
                                     case -1:
-                                        n++;
+                                        n--;
                                         break;
                                     case 0:
                                         break;
                                     case 1:
-                                        n--;
+                                        n++;
                                         break;
                                 }
-                                
-                                printf("\n2x-i+m: %d y-j+n: %d", x-i+m, y-j+n);
-                                board[x-i+m][y-j+n] = RED;
+                                /*printf("\nk: %d l: %d", k, l);
+                                printf("\nx-i+m: %d y-j+n: %d", x-i+m, y-j+n);*/
                             }
-                            
-                            board[x-1][y-1] = RED;
-                            direction++;
-                            printf("\ndone!");
-                            break;
-                        }
-                        else
-                        {
-                            direction++;
-                            printf("\nInvalid Move ");
-                            break;
+                            else if(board[x-i+m][y-j+n] == same)
+                            {
+                                /*printf("\n1x-i+m: %d y-j+n: %d", x-i+m, y-j+n);
+                                printf("\nx-1: %d y-1: %d", x-1, y-1);
+                                printf("\nk: %d l: %d", k, l);*/
+
+                                while((x-i+m) != (x-1) || (y-j+n) != (y-1))
+                                {
+                                    /*printf("\nIn loop");*/
+                                    switch(k)
+                                    {
+                                        case -1:
+                                            m++;
+                                            break;
+                                        case 0:
+                                            break;
+                                        case 1:
+                                            m--;
+                                            break;
+                                    }
+
+                                    switch(l)
+                                    {
+                                        case -1:
+                                            n++;
+                                            break;
+                                        case 0:
+                                            break;
+                                        case 1:
+                                            n--;
+                                            break;
+                                    }
+
+                                    /*printf("\n2x-i+m: %d y-j+n: %d", x-i+m, y-j+n);*/
+                                    board[x-i+m][y-j+n] = same;
+                                }
+
+                                board[x-1][y-1] = same;
+                                /*direction++;*/
+                                /*printf("\ndone!");*/
+                                /*return TRUE;*/
+                                valid = TRUE;
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
                         }
                     }
                 }
-            }
-
-            /*else if(token == CYAN && (x-i) >=0 && (y-j) >= 0)
-            {
-
-
-
-
-                if(board[x-i][y-j] != RED)
-                {
-                    direction++;
-
-                    continue;
-                }
-
                 else
                 {
-                    switch(direction)
-                    {
-                        case 0:
-                            k = -1;
-                            l = -1;
-                            break;
-                        case 1:
-                            k = -1;
-                            l = 0;
-                            break;
-                        case 2:
-                            k = -1;
-                            l = 1;
-                            break;
-                        case 3:
-                            k = 0;
-                            l = -1;
-                            break;
-                        case 4:
-                            k = 0;
-                            l = 0;
-                            break;
-                        case 5:
-                            k = 0;
-                            l = 1;
-                            break;
-                        case 6:
-                            k = 1;
-                            l = -1;
-                            break;
-                        case 7:
-                            k = 1;
-                            l = 0;
-                            break;
-                        case 8:
-                            k = 1;
-                            l = 1;
-                            break;
-                    }
-
-                    while((x-i+k) >= 0 && (x-i+k) < 8 && (y-j+l) >=0 && (y-j+l) < 8)
-                    {
-                        if(board[x-i+k][y-j+l] == RED)
-                        {			
-                            switch(k)
-                            {
-                                case -1:
-                                    k--;
-                                    break;
-                                case 0:
-                                    break;
-                                case 1:
-                                    k++;
-                                    break;
-                            }
-
-                            switch(l)
-                            {
-                                case -1:
-                                    l--;
-                                    break;
-                                case 0:
-                                    break;
-                                case 1:
-                                    l++;
-                                    break;
-                            }
-                        }
-                        else if(board[x-i+k][y-j+l] == CYAN)
-                        {
-
-                            board[x-1][y-1] = CYAN;
-                            board[x-i][y-j] = CYAN;
-                            break;
-                        }
-                        else
-                        {
-                            direction++;
-                            printf("\nInvalid Move");
-                            break;
-                        }
-                    }
+                    direction++;
+                    continue;  
                 }
-            }*/
-
-		}
-	}
+            }
+        }
+    }
 	
 	return FALSE;
 }

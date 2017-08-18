@@ -25,9 +25,8 @@ Cell board[BOARD_HEIGHT][BOARD_WIDTH], same, opposite;
 unsigned redCounter, cyanCounter;
 Boolean finished, valid;
 char coordinate[10];
-unsigned x, y;
 Direction direction;
-int i, j, k, l, m, n;
+int i, j, k, l, m, n, x, y;
 
 
 Player * playGame(Player * first, Player * second);
