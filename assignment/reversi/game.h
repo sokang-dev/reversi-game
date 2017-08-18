@@ -21,13 +21,13 @@ typedef enum direction
 
 Player player1, player2;
 Player *temp;
-Cell board[BOARD_HEIGHT][BOARD_WIDTH];
+Cell board[BOARD_HEIGHT][BOARD_WIDTH], same, opposite;
 unsigned redCounter, cyanCounter;
 Boolean finished, valid;
 char coordinate[10];
-unsigned x, y, k, l;
+unsigned x, y;
 Direction direction;
-int i, j;
+int i, j, k, l, m, n;
 
 
 Player * playGame(Player * first, Player * second);

@@ -18,10 +18,20 @@ void initBoard(Cell board[BOARD_HEIGHT][BOARD_WIDTH])
 		}
 	}
 	
-	board[3][3] = RED;
+    board[2][2] = RED;
+    board[2][3] = CYAN;
+    board[3][3] = CYAN;
+    board[3][4] = CYAN;
+    board[4][2] = RED;
+    board[4][4] = CYAN;
+    board[4][5] = CYAN;
+    board[5][4] = RED;
+    
+    
+	/*board[3][3] = RED;
 	board[4][4] = RED;
 	board[3][4] = CYAN;
-	board[4][3] = CYAN;
+	board[4][3] = CYAN;*/
 }
 
 /**
